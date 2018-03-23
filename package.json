@@ -1,0 +1,20 @@
+{
+  "name": "learning-js-bot",
+  "version": "0.0.0",
+  "description": "LearningJS slack bot",
+  "main": "./src/app.js",
+  "scripts": {
+    "start": "node ./src/app"
+  },
+  "author": "Frank Mazzarella",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/client": "^4.0.1",
+    "dotenv": "^5.0.1",
+    "log4js": "^2.5.3"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0"
+  }
+}
