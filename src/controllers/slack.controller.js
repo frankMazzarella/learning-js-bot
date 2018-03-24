@@ -1,7 +1,8 @@
-const logger = require('log4js');
+const log4js = require('log4js');
 
-logger.getLogger('slack controller');
+const logger = log4js.getLogger('slack controller');
 
 module.exports.actionEndpoint = (req, res) => {
-  logger.info(req);
+  logger.info(`receiving slack action type: ${req.body.type}`);
+  res.send(req.body.challenge);
 };

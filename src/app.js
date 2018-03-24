@@ -37,4 +37,3 @@ function handleAppStarted() {
 }
 
 app.listen(port, handleAppStarted);
-
