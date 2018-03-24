@@ -6,12 +6,14 @@ const bodyParser = require('body-parser');
 const healthcheck = require('express-healthcheck');
 const compression = require('compression');
 const { IncomingWebhook } = require('@slack/client');
+const routes = require('./routes');
 
 const app = express();
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/slack', routes);
 app.get('*', healthcheck());
 
 const port = process.env.PORT || 3000;
@@ -35,4 +37,3 @@ function handleAppStarted() {
 }
 
 app.listen(port, handleAppStarted);
-
