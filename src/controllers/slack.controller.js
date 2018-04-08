@@ -1,9 +1,10 @@
 const log4js = require('log4js');
-const messageParser = require('../services/message-parser.service');
+const messageParserService = require('../services/message-parser.service');
 
 const logger = log4js.getLogger('slack controller');
 
 module.exports.actionEndpoint = (req, res) => {
+  // TODO: ignore messages from bot
   if (req.body.type === 'url_verification') {
     logger.info('handling slack url_verification');
     res.send(req.body.challenge);
@@ -14,13 +15,12 @@ module.exports.actionEndpoint = (req, res) => {
   switch (event.type) {
     case 'message':
       res.sendStatus(200);
-      logger.info(`someone said: ${event.text}`);
-      messageParser.parse(event.text);
+      messageParserService.parse(event.text);
       break;
 
     default:
       res.sendStatus(200);
-      logger.info(`received unknown type: ${event.type}`);
+      logger.warn(`received unknown type: ${event.type}`);
       break;
   }
 };

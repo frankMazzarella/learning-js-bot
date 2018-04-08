@@ -1,4 +1,5 @@
 const log4js = require('log4js');
+const incomingWebhookService = require('./incoming-webhook.service');
 
 const logger = log4js.getLogger('message parser service');
 
@@ -13,6 +14,8 @@ function isPhpMatch(str) {
 module.exports.parse = (message) => {
   if (isPhpMatch(message)) {
     logger.info(`dead puppie found in message: ${message}`);
+    // increment counter in database
+    incomingWebhookService.send('oh, hello');
   }
 };
 
