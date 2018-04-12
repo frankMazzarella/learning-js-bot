@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node ./src/app",
     "watch": "./node_modules/.bin/nodemon ./src/app",
-    "lint": "./node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint .",
+    "migrate-latest": "./node_modules/.bin/knex migrate:latest"
   },
   "author": "Frank Mazzarella",
   "license": "MIT",
