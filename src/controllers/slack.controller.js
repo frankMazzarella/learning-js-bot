@@ -6,7 +6,7 @@ const logger = log4js.getLogger('slack controller');
 module.exports.actionEndpoint = (req, res) => {
   if (req.body.type === 'url_verification') {
     logger.info('handling slack url_verification');
-    res.sendStatus(req.body.challenge);
+    res.send(req.body.challenge);
     return;
   }
 

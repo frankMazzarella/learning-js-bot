@@ -15,7 +15,7 @@ function isPhpMatch(str) {
 
 module.exports.parse = (message) => {
   if (isPhpMatch(message)) {
-    logger.info(`dead puppie found in message: ${message}`);
+    logger.info(`dead puppy found in message: ${message}`);
     incomingWebhookService.send(responseMessage);
   }
 };

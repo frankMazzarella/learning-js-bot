@@ -10,6 +10,6 @@ module.exports.send = (message) => {
       logger.error(err);
       return;
     }
-    logger.info('dead puppie notification sent');
+    logger.info('dead puppy notification sent');
   });
 };
