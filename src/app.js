@@ -6,6 +6,10 @@ const healthcheck = require('express-healthcheck');
 const compression = require('compression');
 const routes = require('./routes');
 
+// TODO: migrations are all fucked up
+// TODO: app resonds to messages from different channels
+// TODO: database config is duplicated
+
 const app = express();
 app.use(compression());
 app.use(bodyParser.json());
