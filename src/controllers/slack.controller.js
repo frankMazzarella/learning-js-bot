@@ -11,7 +11,7 @@ function handleDeadPuppy(messageEvent) {
   const responseMessage = 'Woah there cowboy! :face_with_cowboy_hat: ' +
     'You better watch your fucking mouth before I tell my mom.';
 
-  db(dataService.tables.VIOLATIONS)
+  db(dataService.tables.VIOLATION)
     .insert({
       user: messageEvent.user,
       message: messageEvent.text,

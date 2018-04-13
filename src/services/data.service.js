@@ -13,5 +13,5 @@ const db = knex({
 module.exports.db = db;
 
 module.exports.tables = {
-  VIOLATIONS: 'violations',
+  VIOLATION: 'violation',
 };

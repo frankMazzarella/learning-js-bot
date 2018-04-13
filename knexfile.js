@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 
 const dbConfiguration = {
   client: 'mysql',
@@ -8,7 +9,7 @@ const dbConfiguration = {
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
   },
-  migrations: { directory: './db/migrations' },
+  migrations: { directory: path.join(__dirname, '/db/migrations') },
 };
 
 module.exports = {
