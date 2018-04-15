@@ -1,11 +1,9 @@
 require('dotenv').config();
 const log4js = require('log4js');
-// const os = require('os');
 const express = require('express');
 const bodyParser = require('body-parser');
 const healthcheck = require('express-healthcheck');
 const compression = require('compression');
-// const { IncomingWebhook } = require('@slack/client');
 const routes = require('./routes');
 
 const app = express();
@@ -22,20 +20,6 @@ logger.level = 'info';
 
 function handleAppStarted() {
   logger.info(`app started on port ${port}`);
-
-  // TODO: disabled because annoying everyone in slack
-  // const timeNotification = new IncomingWebhook(process.env.SLACK_WEBHOOK_URL);
-  // const currentTime = new Date().toUTCString();
-  // const message = `Service *v${process.env.npm_package_version}* has started at *${currentTime}* ` +
-  //   `on *${os.hostname()}* - *(${os.platform()})*`;
-
-  // timeNotification.send(message, (err) => {
-  //   if (err) {
-  //     logger.error(err);
-  //     return;
-  //   }
-  //   logger.info('startup notification sent');
-  // });
 }
 
 app.listen(port, handleAppStarted);
