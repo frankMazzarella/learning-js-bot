@@ -7,10 +7,6 @@ const { db } = dataService;
 const logger = log4js.getLogger('slack controller');
 
 function handleDeadPuppy(messageEvent) {
-  logger.info(messageEvent);
-  const responseMessage = 'Woah there cowboy! :face_with_cowboy_hat: ' +
-    'You better watch your fucking mouth before I tell my mom.';
-
   db(dataService.tables.VIOLATION)
     .insert({
       user: messageEvent.user,
@@ -19,8 +15,19 @@ function handleDeadPuppy(messageEvent) {
     })
     .then(() => {
       logger.info('PHP violation stored in database');
-      // TODO: count how many times user has kill, and how many times killed per channel
-      incomingWebhookService.send(responseMessage);
+      Promise
+        .all([
+          db.raw(`SELECT COUNT(*) FROM violation WHERE user='${messageEvent.user}'`), // TODO: fix the double kill
+          db.raw(`SELECT COUNT(*) FROM violation WHERE channel='${messageEvent.channel}'`),
+        ])
+        .then((res) => {
+          const userKillCount = res[0][0][0]['COUNT(*)'];
+          const channelKillCount = res[1][0][0]['COUNT(*)'];
+          const responseMessage = 'Your actions require the sacrifice of `one adorable puppy`\n' +
+            `You have killed ${userKillCount} of ${channelKillCount} puppies.`;
+          incomingWebhookService.send(responseMessage);
+        })
+        .catch(error => logger.error(error.sqlMessage));
     })
     .catch(error => logger.error(error.sqlMessage));
 }
