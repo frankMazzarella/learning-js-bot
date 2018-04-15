@@ -30,9 +30,9 @@ function handleDeadPuppy(messageEvent) {
             `You have killed ${userKillCount} of ${channelKillCount} puppies.`;
           slackResponseService.respond(responseMessage, messageEvent.channel);
         })
-        .catch(error => logger.error(error.sqlMessage));
+        .catch(error => logger.error(error));
     })
-    .catch(error => logger.error(error.sqlMessage));
+    .catch(error => logger.error(error));
 }
 
 module.exports.actionEndpoint = (req, res) => {
