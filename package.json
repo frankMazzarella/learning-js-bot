@@ -1,6 +1,6 @@
 {
   "name": "learning-js-bot",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "LearningJS slack bot",
   "main": "./src/app.js",
   "engines": {
