@@ -1,10 +1,12 @@
 const log4js = require('log4js');
 const messageParserService = require('../services/message-parser.service');
-const incomingWebhookService = require('../services/incoming-webhook.service');
+const slackResponseService = require('../services/slack-response.service');
 const dataService = require('../services/data.service');
 
 const { db } = dataService;
 const logger = log4js.getLogger('slack controller');
+
+// TODO: refactor all of this fucking vomit code
 
 function handleDeadPuppy(messageEvent) {
   db(dataService.tables.VIOLATION)
@@ -17,7 +19,8 @@ function handleDeadPuppy(messageEvent) {
       logger.info('PHP violation stored in database');
       Promise
         .all([
-          db.raw(`SELECT COUNT(*) FROM violation WHERE user='${messageEvent.user}'`), // TODO: fix the double kill
+          db.raw(`SELECT COUNT(*) FROM violation WHERE user='${messageEvent.user}'
+            AND channel='${messageEvent.channel}'`),
           db.raw(`SELECT COUNT(*) FROM violation WHERE channel='${messageEvent.channel}'`),
         ])
         .then((res) => {
@@ -25,7 +28,7 @@ function handleDeadPuppy(messageEvent) {
           const channelKillCount = res[1][0][0]['COUNT(*)'];
           const responseMessage = 'Your actions require the sacrifice of `one adorable puppy`\n' +
             `You have killed ${userKillCount} of ${channelKillCount} puppies.`;
-          incomingWebhookService.send(responseMessage);
+          slackResponseService.respond(responseMessage, messageEvent.channel);
         })
         .catch(error => logger.error(error.sqlMessage));
     })

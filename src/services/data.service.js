@@ -1,14 +1,7 @@
 const knex = require('knex');
+const knexfile = require('../../knexfile');
 
-const db = knex({
-  client: 'mysql',
-  connection: {
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USERNAME,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
-  },
-});
+const db = knex(knexfile.production);
 
 module.exports.db = db;
 
