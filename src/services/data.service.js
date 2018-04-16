@@ -7,5 +7,5 @@ module.exports.db = db;
 
 module.exports.tables = {
   VIOLATION: 'violation',
-  TEAMS: 'teams',
+  TEAMS: 'team',
 };

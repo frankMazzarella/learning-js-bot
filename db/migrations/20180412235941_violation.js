@@ -1,5 +1,5 @@
 exports.up = (knex, Promise) => Promise.all([
-  knex.schema.createTable('teams', (table) => {
+  knex.schema.createTable('team', (table) => {
     table.string('teamId').notNullable();
     table.string('token').notNullable();
     table.timestamps(true, true);
@@ -14,7 +14,7 @@ exports.up = (knex, Promise) => Promise.all([
 ]);
 
 exports.down = (knex, Promise) => Promise.all([
-  knex.schema.dropTable(('teams')),
+  knex.schema.dropTable(('team')),
   knex.schema.dropTable(('violation')),
 ]);
 

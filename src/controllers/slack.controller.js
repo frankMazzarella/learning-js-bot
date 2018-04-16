@@ -37,7 +37,7 @@ function addTokenToMemory(teamId, accessToken) {
 }
 
 function addTokenToDatabase(id, accessToken) {
-  db(dataService.tables.TEAMS)
+  db(dataService.tables.TEAM)
     .insert({
       teamId: id,
       token: accessToken,
@@ -59,7 +59,7 @@ function handleDeadPuppy(messageEvent, teamId) {
     logger.info('Access token retrieved from memory');
   } else {
     // If not, query database for access token.
-    db.raw(`SELECT token FROM teams WHERE teamId='${teamId}'`)
+    db.raw(`SELECT token FROM team WHERE teamId='${teamId}'`)
       .then((data) => {
         // Handle no matching entries
         // If we find the team_id in the table assign associated token
