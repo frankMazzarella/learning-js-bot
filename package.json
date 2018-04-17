@@ -25,7 +25,8 @@
     "express-healthcheck": "^0.1.0",
     "knex": "^0.14.5",
     "log4js": "^2.5.3",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "request": "^2.85.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
